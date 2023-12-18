@@ -46,8 +46,8 @@ function App() {
       <p>{responseMessage}</p>
       <h1>Here we go</h1>
       <p>{responseMessage2}</p>
-      <button onClick={handleCheckButtonClick}>Check</button>
-      <button onClick={handleCheckButtonClick2}>Check</button>
+      <button onClick={handleCheckButtonClick}>Check button</button>
+      <button onClick={handleCheckButtonClick2}>Click here</button>
     </div>
   );
 }
