@@ -1,41 +1,23 @@
 import React, { useState } from 'react';
+import { useGetResponseQuery } from './slice/api.js';
 
 function App() {
   const [responseMessage, setResponseMessage] = useState('');
-  const [responseMessage2, setResponseMessage2] = useState('');
+  const { data, isLoading, error, refetch } = useGetResponseQuery();
 
-  const handleCheckButtonClick = async () => {
+  const handleFetchDataClick = async () => {
     try {
       console.log('Before fetch');
-      const functionUrl = "https://createreactapp.azurewebsites.net/api/httpTrigger1?";
+      const functionUrl = "http://localhost:7071/api/httpTrigger1";
       const response = await fetch(functionUrl, { mode: 'cors' });
       console.log('After fetch', response);
-  
+
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
-  
-      const data = await response.text();
-      setResponseMessage(data);
-    } catch (error) {
-      console.error('There was an error:', error.message);
-    }
-  };
 
-  const handleCheckButtonClick2 = async () => {
-    try {
-      console.log('Before fetch');
-      // Provide a valid URL for the fetch
-      const functionUrl = "https://createreactapp.azurewebsites.net/api/httpTrigger1?";
-      const response = await fetch(functionUrl, { mode: 'cors' });
-      console.log('After fetch', response);
-  
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-  
-      const data = await response.text();
-      setResponseMessage2(data);
+      const responseData = await response.text();
+      setResponseMessage(responseData);
     } catch (error) {
       console.error('There was an error:', error.message);
     }
@@ -45,9 +27,17 @@ function App() {
     <div className="App">
       <p>{responseMessage}</p>
       <h1>Here we go</h1>
-      <p>{responseMessage2}</p>
-      <button onClick={handleCheckButtonClick}>Check button</button>
-      <button onClick={handleCheckButtonClick2}>Click here</button>
+
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : error ? (
+        <p>Error: {error.message}</p>
+      ) : (
+        <>
+          <button onClick={handleFetchDataClick}>Fetch Data</button>
+          {data && <p>{data.message}</p>}
+        </>
+      )}
     </div>
   );
 }
