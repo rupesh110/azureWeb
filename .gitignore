@@ -1,3 +1,5 @@
 azurefunction/node_modules
+azurefunction/.env
 
 staticweb/node_modules
+staticweb/.env

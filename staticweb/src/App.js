@@ -2,42 +2,24 @@ import React, { useState } from 'react';
 import { useGetResponseQuery } from './slice/api.js';
 
 function App() {
-  const [responseMessage, setResponseMessage] = useState('');
-  const { data, isLoading, error, refetch } = useGetResponseQuery();
+  const { data } = useGetResponseQuery();
+  const [buttonClicked, setButtonClicked] = useState(false);
 
-  const handleFetchDataClick = async () => {
-    try {
-      console.log('Before fetch');
-      const functionUrl = "http://localhost:7071/api/httpTrigger1";
-      const response = await fetch(functionUrl, { mode: 'cors' });
-      console.log('After fetch', response);
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
-      const responseData = await response.text();
-      setResponseMessage(responseData);
-    } catch (error) {
-      console.error('There was an error:', error.message);
-    }
+  const handleFetchDataClick = () => {
+    // Set the buttonClicked state to true when the button is clicked
+    setButtonClicked(true);
   };
 
   return (
     <div className="App">
-      <p>{responseMessage}</p>
-      <h1>Here we go</h1>
+      <h1>{process.env.REACT_APP_FUNCTION_URL}</h1>
 
-      {isLoading ? (
-        <p>Loading...</p>
-      ) : error ? (
-        <p>Error: {error.message}</p>
-      ) : (
-        <>
-          <button onClick={handleFetchDataClick}>Fetch Data</button>
-          {data && <p>{data.message}</p>}
-        </>
-      )}
+      <h1>Here we go</h1>
+      <>
+        <button onClick={handleFetchDataClick}>Fetch Data</button>
+        {/* Display data only if the button is clicked */}
+        {buttonClicked && data && <p>{data.message}</p>}
+      </>
     </div>
   );
 }
