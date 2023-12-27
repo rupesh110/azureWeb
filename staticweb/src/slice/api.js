@@ -4,12 +4,14 @@ const baseUrl = process.env.REACT_APP_FUNCTION_URL;
 
 export const api = createApi({
   baseQuery: fetchBaseQuery({ baseUrl }),
-  reducerPath: 'api',
-  tagTypes: ['Test'],
+  reducerPath: 'testapi',
+  tagTypes: ["Test"],
   endpoints: (build) => ({
     getResponse: build.query({
-      query: () => 'httpTrigger2',
-      providesTags: ['Test'],
+      query: () => ({
+        url: 'testing', // Adjust the URL as needed
+      }),
+      providesTags: ["Test"]
     }),
   }),
 });

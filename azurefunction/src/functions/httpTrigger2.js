@@ -15,8 +15,6 @@ app.http('trying', {
             const data = { name };
             const result = await createDocument(database, collection, data);
 
-            context.log("this is a result "+ JSON.stringify(result));
-
             context.res = {
                 body: JSON.stringify(name),
                 status: 200,
