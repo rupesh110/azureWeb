@@ -5,7 +5,6 @@ const { registerRequestSchema } = require('../schemas/usersSchema');
 const { registerUser, isUniqueEmail } = require('../database/usersConnection');
 const { hashPassword, generateToken } = require('../utils/usersValidate');
 
-
 const v = new Validator();
 
 const createUserDetail = async (userData) => {
@@ -32,7 +31,6 @@ const registerUserHandler = async (request, context) => {
         body: JSON.stringify({ message: 'Validation error' }),
         status: 400,
       };
-
     }
 
     if (!validatePassword(userData.Password)) {
@@ -52,22 +50,22 @@ const registerUserHandler = async (request, context) => {
 
     const userDetail = await createUserDetail(userData);
     const result = await registerUser(userDetail);
-    console.log('Result:', result.insertedId);
-    // const token = await generateToken({ id: result.insertedId }, context);
-    // console.log("🚀 ~ file: registerUser.js:58 ~ registerUserHandler ~ token:", token)
-   
+    
+    // Generate a token and set it as a cookie
+    context.log(result)
+    const token = await generateToken(context, result.insertedId );
+    context.log(" file: registerUser.js:56 ~ registerUserHandler ~ token:", token)
 
     return context.res = {
-      body: JSON.stringify({ message: 'Successfully created!!!!' }),
+      body: JSON.stringify({ message: 'Successfully created!!!!', token: {token} }),
       status: 201,
     };
 
   } catch (error) {
-   return context.res = {
+    return context.res = {
       body: JSON.stringify({ message: 'Registration failed' }),
       status: 500,
     };
-
   }
 };
 

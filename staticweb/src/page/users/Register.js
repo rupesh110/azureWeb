@@ -31,8 +31,17 @@ const Register = () => {
 
     try {
       const response = await register(formData);
-      console.log(response);
+      console.log('This is response:', response.data.token);
+      sessionStorage.setItem('token', JSON.stringify(response.data.token));
+      
 
+      const token = sessionStorage.getItem('token');
+      console.log(" file: Register.js:85 ~ handleSubmit ~ token", JSON.parse(token))
+      
+      if (response.data.message === 'Successfully created!!!!') {
+        resetForm();
+      }
+      
      
     } catch (error) {
       // Handle unexpected errors
