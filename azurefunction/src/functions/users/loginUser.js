@@ -10,6 +10,8 @@ const loginUserHandler = async (request, context) => {
         const userData = await validateRequest(request, loginRequestSchema);
 
         const result = await loginUser(userData);
+        //console.log("🚀 ~ file: loginUser.js:13 ~ loginUserHandler ~ result:", userData)
+        
 
         const matchedUser = await comparePassword(userData.Password, result.Password);
 
@@ -31,14 +33,11 @@ const loginUserHandler = async (request, context) => {
                 status: 401, // Unauthorized
             };
         }
-
-        return context.res;
     } catch (error) {
         return context.res = {
             body: JSON.stringify({ message: 'Login failed', error: error.message }),
             status: 400,
         };
-        
     }
 };
 

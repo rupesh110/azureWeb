@@ -2,6 +2,7 @@
 import Register from './page/users/Register.js';
 import Test from './page/users/Test.js';
 import Home from './page/home/Home.js';
+import Login from './page/users/Login.jsx';
 
 function App() {;
 
@@ -9,7 +10,8 @@ function App() {;
     <div className="App">
      {/* <Register /> */}
      {/* <Test /> */}
-     <Home />
+     <Login />
+     {/* <Home /> */}
     </div>
   );
 }
