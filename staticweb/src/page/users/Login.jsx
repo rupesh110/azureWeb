@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
+import { FaGoogle, FaFacebook } from 'react-icons/fa';
+import './Login.css'; // Import your custom CSS file for additional styling
+
 import { useLoginMutation } from '../../slice/usersApi';
 
 const initialData = {
@@ -30,41 +33,67 @@ const Login = () => {
     }));
   };
 
+  const handleForgotPassword = () => {
+    alert('Forgot Password');
+  }
+
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '10%' }}>
-      <Form onSubmit={handleLogin}>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
+    <div className="login-container">
+      <div className="login-header">
+        <h1>🚀 Space Portal</h1>
+        <p>Login to explore the galaxy</p>
+      </div>
+
+      <Form onSubmit={handleLogin} className="login-form">
+        <Form.Group controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control
             type="email"
-            placeholder="Enter email"
+            placeholder="Enter your email"
             name="Email"
             value={formData.Email}
             onChange={handleChange}
           />
-          <Form.Text className="text-muted">
-            We'll never share your email with anyone else.
-          </Form.Text>
         </Form.Group>
 
-        <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Group controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
           <Form.Control
             type="password"
-            placeholder="Password"
+            placeholder="Enter your password"
             name="Password"
             value={formData.Password}
             onChange={handleChange}
           />
         </Form.Group>
 
-        <Form.Group className="mb-3" controlId="formBasicCheckbox">
-          <Form.Check type="checkbox" label="Check me out" />
-        </Form.Group>
-
-        <Button variant="primary" type="submit" disabled={isLoading}>
-          {isLoading ? 'Logging...' : 'Login'}
+        <Button variant="primary" type="submit" disabled={isLoading} className="login-btn">
+          {isLoading ? 'Logging in...' : 'Login'}
         </Button>
+        <p className='forgot-password' onClick={handleForgotPassword}>Forgot Password</p>
+
+        <div className="or-divider">
+          <div className="or-line"></div>
+          <div className="or-text">or</div>
+          <div className="or-line"></div>
+        </div>
+
+      <div>
+        
+      </div>
+
+    <div className='sign-in-with-media'>
+    <Button variant="danger" className="media-login-btn">
+          <FaGoogle className="google-icon" />
+          Sign with Google
+        </Button>
+
+        <Button variant="primary" className="media-login-btn">
+          <FaFacebook className="facebook-icon" />
+           Sign with Facebook
+        </Button>
+    </div>
+  
       </Form>
     </div>
   );

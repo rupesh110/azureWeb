@@ -1,7 +1,25 @@
-// auth.js
-const isAuthenticated = () => {
-  const session = sessionStorage.getItem('token');
-  return !!session && !!JSON.parse(session).token; // Double negation for explicit boolean conversion
-};
+// authSlice.js
+import { createSlice } from '@reduxjs/toolkit';
 
-export { isAuthenticated };
+export const authSlice = createSlice({
+  name: 'auth',
+  initialState: {
+    isAuthenticated: false,
+
+  },
+  reducers: {
+    login: (state) => {
+      state.isAuthenticated = true;
+  
+    },
+    logout: (state) => {
+      state.isAuthenticated = false;
+    },
+  },
+});
+
+export const { login, logout } = authSlice.actions;
+
+export const isAuthenticated = (state) => state.auth.isAuthenticated;
+
+export default authSlice.reducer;
