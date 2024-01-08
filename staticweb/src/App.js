@@ -8,10 +8,13 @@ import Login from './page/users/Login.jsx';
 import PrivatePage from './page/users/PrivatePage.jsx';
 import AuthRoute from './Route/AuthRoute.js';
 
+import LoginWithGoogle from './page/users/LoginWithGoogle.jsx';
+
 function App() {
   return (
     <Router>
       <Routes>
+        <Route path="/loginwithgoogle" element={<LoginWithGoogle />} />
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/test" element={<Test />} />

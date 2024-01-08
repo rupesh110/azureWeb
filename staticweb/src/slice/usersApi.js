@@ -22,6 +22,13 @@ export const usersApi = createApi({
                 body: data,
             })
         }),
+        loginWithGoogle: builder.mutation({
+            query: (data) => ({
+                url: '/users/loginWithGoogle',
+                method: 'POST',
+                body: data,
+            })
+        }),
         getUserFullName: builder.mutation({
             query: (token) => ({  // Use token as a parameter
                 url: '/users/getUserFullName',
@@ -32,4 +39,4 @@ export const usersApi = createApi({
     }),
 });
 
-export const { useRegisterMutation, useLoginMutation, useGetUserFullNameMutation } = usersApi;
+export const { useRegisterMutation, useLoginMutation, useLoginWithGoogleMutation, useGetUserFullNameMutation } = usersApi;

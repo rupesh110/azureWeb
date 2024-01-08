@@ -3,7 +3,9 @@ import { Button, Form } from 'react-bootstrap';
 import { FaGoogle, FaFacebook } from 'react-icons/fa';
 import './Login.css'; // Import your custom CSS file for additional styling
 
-import { useLoginMutation } from '../../slice/usersApi';
+import { useLoginMutation, useLoginWithGoogleMutation } from '../../slice/usersApi';
+import {auth} from '../../functions/firebase';
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 
 const initialData = {
   Email: '',
@@ -13,6 +15,7 @@ const initialData = {
 const Login = () => {
   const [formData, setFormData] = useState(initialData);
   const [login, { data, error, isLoading }] = useLoginMutation();
+  const [loginWithGoogle, { data: googleData, error: googleError, isLoading: googleIsLoading }] = useLoginWithGoogleMutation();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -35,6 +38,28 @@ const Login = () => {
 
   const handleForgotPassword = () => {
     alert('Forgot Password');
+  }
+
+  const handleGoogleLogin = async(e)=> {
+    const googleProvider = new GoogleAuthProvider();
+    try{
+      const userCredential = await signInWithPopup(auth, googleProvider);
+      const userUid = userCredential.user.uid;
+      const {firstName, email} = userCredential._tokenResponse;
+
+      const userData = {
+        FirstName: firstName,
+        Email: email,
+        uid: userUid,
+      }
+      console.log("🚀 ~ file: Login.jsx:56 ~ handleGoogleLogin ~ userData:", userData)
+      const result = await loginWithGoogle(userData);
+      console.log("🚀 ~ file: Login.jsx ~ line 29 ~ loginWithEmailAndPassword ~ user", result)
+      
+    }catch(error){
+      console.log("🚀 ~ file: Login.jsx ~ line 31 ~ loginWithEmailAndPassword ~ error", error)
+    }
+
   }
 
   return (
@@ -83,7 +108,7 @@ const Login = () => {
       </div>
 
     <div className='sign-in-with-media'>
-    <Button variant="danger" className="media-login-btn">
+    <Button variant="danger" className="media-login-btn" onClick={handleGoogleLogin}>
           <FaGoogle className="google-icon" />
           Sign with Google
         </Button>

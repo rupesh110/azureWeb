@@ -17,4 +17,16 @@ const registerRequestSchema = {
     required: ['FullName', 'Email', 'Password'],
 };
 
-module.exports = { loginRequestSchema, registerRequestSchema };
+const signUpWithGoogleSchema = {
+    type: 'object',
+    properties: {
+        FullName: { type: 'string' },
+        Email: { type: 'string' },
+        uid: { type: 'string' },
+       // DisplayName: { type: 'string' },
+    },
+    required: ['FullName', 'Email', 'uid'],
+
+}
+
+module.exports = { loginRequestSchema, registerRequestSchema, signUpWithGoogleSchema };

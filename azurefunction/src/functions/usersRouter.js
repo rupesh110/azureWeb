@@ -4,6 +4,7 @@ const loginUserHandler = require('./users/loginUser');
 const testing = require('./users/testing');
 const registerUserHandler = require('./users/registerUser');
 const getUserFullNameHandler = require('./users/userFullname');
+const loginMediaUserHandler = require('./users/loginMediaUser');
 
 app.http('register', {
     route: 'users/register',
@@ -18,6 +19,13 @@ app.http('login', {
     authLevel: 'anonymous',
     handler: loginUserHandler,
 });
+
+app.http('loginWithGoogle', {
+    route: 'users/loginWithGoogle',
+    methods: ['POST'],
+    authLevel: 'anonymous',
+    handler: loginMediaUserHandler,
+})
 
 app.http('getUserFullName', {
     route: 'users/getUserFullName',

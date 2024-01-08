@@ -8,6 +8,7 @@ const loginUserHandler = async (request, context) => {
         context.log('Http function was triggered.');
 
         const userData = await validateRequest(request, loginRequestSchema);
+        console.log("🚀 ~ file: loginUser.js:11 ~ loginUserHandler ~ userData:", userData)
 
         const result = await loginUser(userData);
         //console.log("🚀 ~ file: loginUser.js:13 ~ loginUserHandler ~ result:", userData)
