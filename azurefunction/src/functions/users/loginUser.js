@@ -11,20 +11,20 @@ const loginUserHandler = async (request, context) => {
         console.log("🚀 ~ file: loginUser.js:11 ~ loginUserHandler ~ userData:", userData)
 
         const result = await loginUser(userData);
-        //console.log("🚀 ~ file: loginUser.js:13 ~ loginUserHandler ~ result:", userData)
+        context.log("🚀 ~ file: loginUser.js:13 ~ loginUserHandler ~ result:", result._id)
         
-
+        
         const matchedUser = await comparePassword(userData.Password, result.Password);
 
         if (result.Email === userData.Email && matchedUser) {
-            const token = await generateToken(result);
-
+            const token = await generateToken(context, result._id.toString());
+            context.log('Generated token:', token);
             const decoded = await verifyToken(token);
             context.log('Decoded token:', decoded);
 
             // Include the token in the response to be sent to the client
             return context.res = {
-                body: JSON.stringify({ message: 'Login successful', token }),
+                body: JSON.stringify({ message: 'Login successful', token:{token} }),
                 status: 200,
             };
 

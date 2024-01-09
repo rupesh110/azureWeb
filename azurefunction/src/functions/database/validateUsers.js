@@ -12,7 +12,6 @@ async function getUsersFullname(userid, databaseName = defaultDatabase, collecti
 
         const database = client.db(databaseName);
         const collection = database.collection(collectionName);
-
         // Convert userid to ObjectId if it's not already
         const objectId = ObjectId.isValid(userid) ? new ObjectId(userid) : userid;
 

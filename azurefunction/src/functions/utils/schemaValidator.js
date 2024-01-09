@@ -4,7 +4,7 @@ const v = new Validator();
 
 const validateRequest= async (request, schema) => {
     const userData = await request.json();
-    console.log("i am here")
+    
     const validationResult = v.validate(userData, schema);
 
     if (!validationResult.valid) {

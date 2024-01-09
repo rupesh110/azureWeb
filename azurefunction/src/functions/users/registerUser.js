@@ -50,9 +50,10 @@ const registerUserHandler = async (request, context) => {
 
     const userDetail = await createUserDetail(userData);
     const result = await registerUser(userDetail);
+    console.log("🚀 ~ file: registerUser.js:53 ~ registerUserHandler ~ result:", result)
     
     // Generate a token and set it as a cookie
-    context.log(result)
+
     const token = await generateToken(context, result.insertedId );
     context.log(" file: registerUser.js:56 ~ registerUserHandler ~ token:", token)
 

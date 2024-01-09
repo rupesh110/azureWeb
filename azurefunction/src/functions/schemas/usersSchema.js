@@ -23,7 +23,6 @@ const signUpWithGoogleSchema = {
         FullName: { type: 'string' },
         Email: { type: 'string' },
         uid: { type: 'string' },
-       // DisplayName: { type: 'string' },
     },
     required: ['FullName', 'Email', 'uid'],
 

@@ -1,30 +1,36 @@
 import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { FaGoogle, FaFacebook } from 'react-icons/fa';
-import './Login.css'; // Import your custom CSS file for additional styling
+ // Import your custom CSS file for additional styling
+import { useNavigate } from 'react-router-dom';
 
-import { useLoginMutation, useLoginWithGoogleMutation } from '../../slice/usersApi';
-import {auth} from '../../functions/firebase';
-import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { useLoginMutation } from '../../../slice/usersApi.js';
+import './Login.css';
 
+import LoginGoogle from './LoginGoogle.jsx';
+import LoginFacebook from './LoginFacebook.jsx';
 const initialData = {
   Email: '',
   Password: '',
 };
 
+
 const Login = () => {
   const [formData, setFormData] = useState(initialData);
   const [login, { data, error, isLoading }] = useLoginMutation();
-  const [loginWithGoogle, { data: googleData, error: googleError, isLoading: googleIsLoading }] = useLoginWithGoogleMutation();
+  const naviate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     const result = await login(formData);
     console.log('data', result);
-
     // Check if login was successful before resetting the form
     if (!error && result && result.data) {
       setFormData(initialData); // Reset the form to initial state
+    }
+    if(result.data.token){
+      sessionStorage.setItem('token', JSON.stringify(result.data.token));
+      naviate('/');
     }
   };
 
@@ -38,28 +44,6 @@ const Login = () => {
 
   const handleForgotPassword = () => {
     alert('Forgot Password');
-  }
-
-  const handleGoogleLogin = async(e)=> {
-    const googleProvider = new GoogleAuthProvider();
-    try{
-      const userCredential = await signInWithPopup(auth, googleProvider);
-      const userUid = userCredential.user.uid;
-      const {firstName, email} = userCredential._tokenResponse;
-
-      const userData = {
-        FirstName: firstName,
-        Email: email,
-        uid: userUid,
-      }
-      console.log("🚀 ~ file: Login.jsx:56 ~ handleGoogleLogin ~ userData:", userData)
-      const result = await loginWithGoogle(userData);
-      console.log("🚀 ~ file: Login.jsx ~ line 29 ~ loginWithEmailAndPassword ~ user", result)
-      
-    }catch(error){
-      console.log("🚀 ~ file: Login.jsx ~ line 31 ~ loginWithEmailAndPassword ~ error", error)
-    }
-
   }
 
   return (
@@ -108,15 +92,9 @@ const Login = () => {
       </div>
 
     <div className='sign-in-with-media'>
-    <Button variant="danger" className="media-login-btn" onClick={handleGoogleLogin}>
-          <FaGoogle className="google-icon" />
-          Sign with Google
-        </Button>
+        <LoginGoogle />
 
-        <Button variant="primary" className="media-login-btn">
-          <FaFacebook className="facebook-icon" />
-           Sign with Facebook
-        </Button>
+        <LoginFacebook />
     </div>
   
       </Form>
