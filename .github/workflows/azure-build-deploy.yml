@@ -19,30 +19,17 @@ jobs:
         with:
           node-version: "14"
 
-      - name: Install dependencies
-        run: npm install
-        working-directory: ./staticweb
-
-      - name: Build React app
-        run: npm run build
-        working-directory: ./staticweb
-
-      - name: Print Deployment Token
-        run: 'echo "Deployment Token: ${{ toJson(secrets.AZURE_STATIC_WEB_APPS_API_TOKEN) }}"'
-
-      - name: Print message
-        run: echo "Job completed"
+      - name: Install dependencies and build
+        run: |
+          cd staticweb
+          npm install
+          npm run build
 
   deploy:
     runs-on: ubuntu-latest
     needs: build
 
     steps:
-      - name: Debugging
-        run: |
-          pwd
-          ls /github/workspace/staticweb
-
       - name: Print directory structure
         run: |
           pwd
@@ -51,7 +38,7 @@ jobs:
       - name: Deploy to Azure Static Web Apps
         uses: Azure/static-web-apps-deploy@latest
         with:
-          app_location: "azureweb/staticweb/build"
+          app_location: "staticweb/build"
           api_location: ""
           output_location: ""
           azure_static_web_apps_api_token: ${{secrets.AZURE_STATIC_WEB_APPS_API_TOKEN}}
