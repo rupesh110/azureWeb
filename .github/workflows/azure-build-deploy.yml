@@ -40,3 +40,4 @@ jobs:
           app_location: "./staticweb/build" # Update with your build output directory
           api_location: "" # Update if you have an API folder
           app_artifact_location: "" # Update if you have an artifact folder
+          deployment_action: "upload"
