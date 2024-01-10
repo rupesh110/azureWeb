@@ -24,6 +24,7 @@ const LoginFacebook = () => {
                 Email: result.user.email,
             };
             setFormData(updatedFormData);
+            console.log('formData', formData);
         } catch (error) {
             console.log('error', error);
         }

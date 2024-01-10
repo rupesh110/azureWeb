@@ -1,11 +1,11 @@
 import React from 'react';
-import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
+import { Container, Nav, Navbar} from 'react-bootstrap';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { Link } from 'react-router-dom';
 import { useUserFullName } from '../slice/authUsers';
 
 const NavbarHome = () => {
-  const { userFullName, isLoading, error } = useUserFullName();
+  const { userFullName} = useUserFullName();
 
   const handleLogout = () => {
     sessionStorage.removeItem('token');

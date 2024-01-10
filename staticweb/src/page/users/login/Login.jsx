@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
-import { FaGoogle, FaFacebook } from 'react-icons/fa';
- // Import your custom CSS file for additional styling
+
 import { useNavigate } from 'react-router-dom';
 
 import { useLoginMutation } from '../../../slice/usersApi.js';
@@ -17,7 +16,7 @@ const initialData = {
 
 const Login = () => {
   const [formData, setFormData] = useState(initialData);
-  const [login, { data, error, isLoading }] = useLoginMutation();
+  const [login, {error, isLoading }] = useLoginMutation();
   const naviate = useNavigate();
 
   const handleLogin = async (e) => {
