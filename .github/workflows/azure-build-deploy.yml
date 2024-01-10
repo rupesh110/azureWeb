@@ -27,7 +27,7 @@ jobs:
       - name: Deploy to Azure Static Web Apps
         uses: Azure/static-web-apps-deploy@v1
         with:
-          # Azure Static Web Apps configuration
+          # Azure Static Web Apps configurations
           action: "upload"
           app_location: "/staticweb" # Change this if your app is in a subdirectory
           output_location: "build" # Change this if your build output is in a different directory
