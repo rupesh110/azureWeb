@@ -27,7 +27,7 @@ jobs:
         working-directory: ./staticweb
 
       - name: Print Deployment Token
-        run: 'echo "Deployment Token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}"'
+        run: 'echo "Deployment Token: ${{ toJson(secrets.AZURE_STATIC_WEB_APPS_API_TOKEN) }}"'
 
       - name: Print message
         run: echo "Job completed"
