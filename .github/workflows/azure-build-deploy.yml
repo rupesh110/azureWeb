@@ -1,4 +1,4 @@
-name: Azure Static Web Apps CI/CD
+name: Build React App
 
 on:
   push:
@@ -11,17 +11,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@latest-version
+        uses: actions/checkout@v2
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: "16"
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Build React app
-        run: npm run build
-        
-  
+      - name: Print a message
+        run: echo "Hello from GitHub Actions!"
