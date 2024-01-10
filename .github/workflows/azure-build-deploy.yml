@@ -13,5 +13,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "16"
+          
+      - name: Install dependencies
+        run: npm install
+
       - name: Print a message
         run: echo "Hello from GitHub Actions!"
