@@ -8,7 +8,7 @@ const isAuthenticated = () => {
 
 const useUserFullName = () => {
   const [userFullName, setUserFullName] = useState('');
-  const [getUserFullName, { data, isLoading, error }] = useGetUserFullNameMutation();
+  const [getUserFullName, {isLoading, error }] = useGetUserFullNameMutation();
 
   useEffect(() => {
     const fetchUserFullName = async () => {
