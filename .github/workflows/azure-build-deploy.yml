@@ -30,14 +30,6 @@ jobs:
     needs: [build]
 
     steps:
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "14"
-
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
       - name: Deploy to Azure Static Web Apps
         uses: Azure/static-web-apps-deploy@latest
         with:
