@@ -24,12 +24,7 @@ jobs:
 
       - name: Build React app
         run: npm run build
+        working-directory: ./staticweb
 
-      - name: Deploy to Azure Static Web Apps
-        uses: Azure/static-web-apps-deploy@v1
-        with:
-          # Azure Static Web Apps configuration
-          action: "upload"
-          app_location: "/staticweb" # Change this if your app is in a subdirectory
-          output_location: "build" # Change this if your build output is in a different directory
-          app_artifact_location: "/" # Change this if your app artifacts are in a subdirectory
+      - name: print message
+        run: echo "Job completed"
