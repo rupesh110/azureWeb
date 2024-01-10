@@ -37,8 +37,7 @@ jobs:
       - name: Deploy to Azure Static Web Apps
         uses: Azure/static-web-apps-deploy@latest
         with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
-          app_location: "./staticweb/build" # Update with your build output directory
-          api_location: "" # Update if you have an API folder
-          app_artifact_location: "" # Update if you have an artifact folder
-          deployment_action: "upload"
+          app_location: "./staticweb/build" # Update this line
+          api_location: ""
+          app_artifact_location: ""
+          deployment_token: ${{secrets.AZURE_STATIC_WEB_APPS_API_TOKEN}}
