@@ -40,5 +40,5 @@ jobs:
           app_location: "./staticweb/build" # Update this line
           api_location: ""
           app_artifact_location: ""
-          deployment_token: ${{secrets.AZURE_STATIC_WEB_APPS_API_TOKEN}}
+          deployment_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
           deployment_action: "upload"
