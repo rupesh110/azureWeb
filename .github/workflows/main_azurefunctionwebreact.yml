@@ -46,6 +46,9 @@ jobs:
         with:
           name: build-artifact
 
+      - name: Unzip artifact for deployment
+        run: unzip release.zip
+
       - name: Deploy to Azure Function App
         uses: Azure/functions-action@v1
         with:
