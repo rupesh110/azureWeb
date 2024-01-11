@@ -27,7 +27,7 @@ jobs:
           popd
 
       - name: Zip the Artifact
-        run: zip -r release.zip ./azureFunction/*
+        run: zip -r release.zip ./azurefunction/*
 
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v2
