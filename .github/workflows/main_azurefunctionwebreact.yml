@@ -1,4 +1,4 @@
-name: Build and Deploy to Azure Function App
+name: Build and Deploy Azure Functions
 
 on:
   push:
@@ -16,18 +16,18 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: "14.17.6"
+          node-version: "14"
 
       - name: Install Dependencies and Build
         run: |
-          pushd './azurefunction'
+          pushd './src/functions'
           npm install
           npm run build --if-present
           npm run test --if-present
           popd
 
       - name: Zip the Artifact
-        run: zip -r release.zip ./azurefunction/*
+        run: zip -r release.zip ./src/functions/*
 
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v2
@@ -42,8 +42,6 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
 
       - name: Download Build Artifact
         uses: actions/download-artifact@v2
@@ -56,6 +54,6 @@ jobs:
       - name: Deploy to Azure Function App
         uses: Azure/functions-action@v1
         with:
-          app-name: "azureFunctionWebReact"
+          app-name: "your-function-app-name"
           package: ${{ github.workspace }}/release.zip
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_B90D2CD1FAE74F2989C45BA6EE1CC975 }}
