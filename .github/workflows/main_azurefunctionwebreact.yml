@@ -20,14 +20,14 @@ jobs:
 
       - name: Install Dependencies and Build
         run: |
-          pushd './azurefunction'
+          pushd './azurefunction/src'
           npm install
           npm run build --if-present
           npm run test --if-present
           popd
 
       - name: Zip the Artifact
-        run: zip -r release.zip ./azurefunction/*
+        run: zip -r release.zip ./azurefunction/src/*
 
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v2
