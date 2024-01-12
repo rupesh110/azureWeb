@@ -29,7 +29,7 @@ jobs:
           popd
 
       - name: Zip the Artifact
-        run: zip -r -q release.zip ./azurefunction/src/functions/* -x "azure-pipelines-1.yml"
+        run: zip -o release.zip ./azurefunction/*
 
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v2
