@@ -1,0 +1,101 @@
+/* Add these styles to your existing Login.css file */
+
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  
+  .login-header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .login-header h1 {
+    font-size: 2em;
+  }
+  
+  .login-header p {
+    color: #888;
+  }
+  
+  .login-form {
+    width: 300px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+  }
+  
+  .login-btn {
+    width: 100%;
+    margin-top: 10px;
+  }
+  
+  .google-login-btn {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #dd4b39;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .google-login-btn:hover {
+    background-color: #c23321;
+  }
+  
+  .google-icon {
+    margin-right: 10px;
+  }
+  
+  .or-divider {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+  }
+  
+  .or-line {
+    flex-grow: 1;
+    height: 1px;
+    background-color: #ccc;
+  }
+  
+  .or-text {
+    margin: 0 10px;
+    color: #555;
+  }
+
+  .sign-in-with-media{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: auto;
+    padding: auto;
+  }
+
+  .media-login-btn{
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+
+  .forgot-password{
+    margin-top: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: grey;
+    border: none;
+    cursor: pointer;
+  }
+  

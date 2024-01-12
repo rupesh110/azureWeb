@@ -1,0 +1,5 @@
+serverlessApi/node_modules
+serverlessApi/.env
+
+staticweb/node_modules
+staticweb/.env
