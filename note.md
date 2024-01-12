@@ -1,0 +1,2 @@
+- need to verify auth as central not on home using from home
+- and need to pass that auth to other frontend functions as well

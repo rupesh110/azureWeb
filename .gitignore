@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 serverlessApi/node_modules
 serverlessApi/.env
+=======
+azurefunction/node_modules
+azurefunction/.env
+>>>>>>> 232938e5a3a5b35d27a3a78329fbb72ad4ea8cfd
 
 staticweb/node_modules
 staticweb/.env
