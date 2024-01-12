@@ -7,8 +7,12 @@
     "test": "echo \"No tests yet...\""
   },
   "dependencies": {
-    "@azure/functions": "^4.0.0"
+    "@azure/functions": "^4.0.0",
+    "bcrypt": "^5.1.1",
+    "jsonschema": "^1.4.1",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.3.0",
+    "uuid": "^9.0.1"
   },
-  "devDependencies": {},
   "main": "src/functions/*.js"
 }
