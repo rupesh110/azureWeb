@@ -1,10 +1,6 @@
-const {app } = require('@azure/functions');
+module.exports = async function (context, req) {
+    context.log(
+        'JavaScript HTTP trigger function processed a request.'
 
-app.http('httpTrigger10', {
-        
-        handler:  async (context, req) => 
-        context.res = {
-            status: 200,
-            body: 'Hello, world!'
-        }
-})
+    )
+}
