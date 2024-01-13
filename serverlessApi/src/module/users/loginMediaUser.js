@@ -1,58 +1,43 @@
-const { signUpWithGoogleSchema} = require('../schemas/usersSchema');
-const { validateRequest } = require('../utils/schemaValidator');
-const { registerUser, isUniqueEmail, loginUser } = require('../database/usersConnection');
-const Validator = require('jsonschema').Validator;
-const { generateToken } = require('../utils/usersValidate');
+import { signUpWithGoogleSchema } from '../schemas/usersSchema.js';
+import { registerUser, isUniqueEmail, loginUser } from '../database/usersConnection.js';
+import { Validator } from 'jsonschema';
+import jwt from 'jsonwebtoken';
 
 const v = new Validator();
+const secretKey = process.env.JWT_SECRET || 'defaultSecretKey';
 
-const loginMediaUserHandler = async function (request, context) {
-    context.log('Http function was triggered.');
-    const usersData = await request.json();
-    context.log('I am here');
-    context.log('User data:', JSON.stringify(usersData));
-    
+const loginMediaUserHandler = async (request, context) => {
+    const usersData = await request.json();    
+
     const validationResult = v.validate(usersData, signUpWithGoogleSchema);
-    context.log("🚀 ~ file: loginMediaUser.js:9 ~ loginMediaUserHandler ~ validationResult:", validationResult)
-    
+
     if (!validationResult.valid) {
         return context.res = {
             body: JSON.stringify({ message: 'Validation error' }),
             status: 400,
         };
-    }else{
+    } else {
         const isUniqueEmailResponse = await isUniqueEmail(usersData.Email);
         const matchedUser = await loginUser(usersData);
-        console.log("🚀 ~ file: loginMediaUser.js:29 ~ loginMediaUserHandler ~ matchedUser:", matchedUser)
-        
-        const token = await generateToken(context, matchedUser._id.toString());
-    
+        console.log("🚀 ~ file: loginMediaUser.js:29 ~ loginMediaUserHandler ~ matchedUser:", matchedUser);
+
+        const token = jwt.sign({ userid: matchedUser?._id?.toString() }, secretKey, { expiresIn: '1h' });
         if (!isUniqueEmailResponse) {
-            context.log('Email already exists:', usersData.Email);
             return context.res = {
-                body: JSON.stringify({ message: 'Email already exists', token:{token} }),
+                body: JSON.stringify({ message: 'Email already exists', token }),
                 status: 409,
             };
-        }else{
+        } else {
             const result = await registerUser(usersData);
-            context.log("🚀 ~ file: loginMediaUser.js:9 ~ loginMediaUserHandler ~ result", result)
-            const token = await generateToken(context, result.insertedId);
+            context.log("🚀 ~ file: loginMediaUser.js:9 ~ loginMediaUserHandler ~ result", result);
+            const token = jwt.sign({ userid: result?.insertedId?.toString() }, secretKey, { expiresIn: '1h' });
 
-            if (matchedUser) {
-                const token = await generateToken(context, matchedUser);
-                context.log("🚀 ~ file: loginMediaUser.js:9 ~ loginMediaUserHandler ~ token", token)
-                return context.res = {
-                    body: JSON.stringify({ message: 'Login successful', token:{token}}),
-                    status: 200,
-                };
-            } else {
-                return context.res = {
-                    body: JSON.stringify({ message: 'Login failed Invalid credentials' }),
-                    status: 401, // Unauthorized
-                };
-            }
+            return context.res = {
+                body: JSON.stringify({ message: 'Welcome to this page', token }),
+                status: 202,
+            };
         }
     }
 }
 
-module.exports = loginMediaUserHandler;
+export default loginMediaUserHandler;

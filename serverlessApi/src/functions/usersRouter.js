@@ -1,30 +1,46 @@
-const {app } = require('@azure/functions');
+import { app } from '@azure/functions';
 
-const testing = require('../module/users/testing.js');
-const registerUserHandler = require('../module/users/registerUser.js');
-// // const printHelper = require('../module/components/helper1.js');
-// const getUserFullNameHandler = require('../module/users/userFullname.js');
+import registerUserHandler from '../module/users/registerUser.js';
+import loginUserHandler from '../module/users/loginUser.js';
+import loginMediaUserHandler from '../module/users/loginMediaUser.js';
+import getUserFullNameHandler from '../module/users/userFullname.js';
 
-app.http('testing', {
-    methods: ['GET'],
+app.http('register', {
+    methods: ['GET', 'POST'],
     authLevel: 'anonymous',
-    handler: testing,
-})
+    route: 'users/register',
+    handler: registerUserHandler,
+});
 
-app.http('testing2', {
+app.http('login', {
+    methods: ['GET', 'POST'],
+    authLevel: 'anonymous',
+    route: 'users/login',
+    handler: loginUserHandler,
+});
+
+app.http('loginMedia', {
+    methods: ['GET', 'POST'],
+    authLevel: 'anonymous',
+    route: 'users/loginMedia',
+    handler: loginMediaUserHandler,
+});
+
+app.http('userFullname', {
+    methods: ['GET', 'POST'],
+    authLevel: 'anonymous',
+    route: 'users/userFullname',
+    handler: getUserFullNameHandler,
+});
+
+app.http("test", {
     methods: ['GET', 'POST'],
     authLevel: 'anonymous',
     handler: async (request, context) => {
         context.log(`Http function processed request for url "${request.url}"`);
 
-        const name = request.query.get('name') || await request.text() || 'testing 2';
+        const name = request.query.get('name') || await request.text() || 'world loosers';
 
         return { body: `Hello, ${name}!` };
     }
 })
-
-app.http('register', {
-    methods: ['GET','POST'],
-    authLevel: 'anonymous',
-    handler: registerUserHandler,
-});

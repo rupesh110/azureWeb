@@ -1,4 +1,4 @@
-const Validator = require('jsonschema').Validator;
+import { Validator } from 'jsonschema';
 
 const v = new Validator();
 
@@ -13,6 +13,5 @@ const validateRequest= async (request, schema) => {
     return userData;
 }
 
-module.exports = {
-    validateRequest,
-};
+
+export { validateRequest };

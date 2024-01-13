@@ -1,9 +1,9 @@
-const { MongoClient, ObjectId } = require('mongodb');
+import { MongoClient, ObjectId } from 'mongodb';
 
 const uri = "mongodb+srv://admin:Password@cluster0.6pm48op.mongodb.net/?retryWrites=true&w=majority";
 
 
-async function connectToMongo() {
+const connectToMongo = async() => {
     let client;
     if (!client) {
         client = new MongoClient(uri);
@@ -12,4 +12,4 @@ async function connectToMongo() {
     return client;
 }
 
-module.exports = { connectToMongo};
+export default connectToMongo;

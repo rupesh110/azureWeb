@@ -28,4 +28,4 @@ const signUpWithGoogleSchema = {
 
 }
 
-module.exports = { loginRequestSchema, registerRequestSchema, signUpWithGoogleSchema };
+export { loginRequestSchema, registerRequestSchema, signUpWithGoogleSchema };

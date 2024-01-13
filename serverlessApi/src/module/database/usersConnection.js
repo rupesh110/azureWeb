@@ -1,9 +1,9 @@
-const { connectToMongo } = require('./mongoConnection');
+import connectToMongo from './mongoConnection.js';
 
 const defaultDatabase = 'test'; // Default database name
 const defaultCollection = 'users'; // Default collection name
 
-async function createDocument(data, databaseName = defaultDatabase, collectionName = defaultCollection) {
+const createDocument = async(data, databaseName = defaultDatabase, collectionName = defaultCollection)=> {
     const client = await connectToMongo();
     console.log("Connected correctly to server ");
     try {
@@ -16,7 +16,7 @@ async function createDocument(data, databaseName = defaultDatabase, collectionNa
     }
 }
 
-async function getDocuments(databaseName = defaultDatabase, collectionName = defaultCollection) {
+const getDocuments= async(databaseName = defaultDatabase, collectionName = defaultCollection) => {
     const client = await connectToMongo();
     const database = client.db(databaseName);
     const collection = database.collection(collectionName);
@@ -24,7 +24,7 @@ async function getDocuments(databaseName = defaultDatabase, collectionName = def
     return collection.find().toArray();
 }
 
-async function registerUser(userDetail, databaseName = defaultDatabase, collectionName = defaultCollection) {
+const registerUser = async(userDetail, databaseName = defaultDatabase, collectionName = defaultCollection)=> {
     const client = await connectToMongo();
     console.log("Connected correctly to server registerUser");
     try {
@@ -43,15 +43,13 @@ async function registerUser(userDetail, databaseName = defaultDatabase, collecti
     }
 }
 
-
-
-async function loginUser(userDetail, databaseName = defaultDatabase, collectionName = defaultCollection) {
+const loginUser = async(userDetail, databaseName = defaultDatabase, collectionName = defaultCollection) => {
     const client = await connectToMongo();
     console.log("Connected correctly to server loginUser");
     try {
         const database = client.db(databaseName);
         const collection = database.collection(collectionName);
-        const result = await collection.findOne({ Email: userDetail.Email});
+        const result = await collection.findOne({ Email: userDetail.Email });
 
         return result;
     } catch (error) {
@@ -64,10 +62,10 @@ async function loginUser(userDetail, databaseName = defaultDatabase, collectionN
     }
 }
 
-async function isUniqueEmail(email, databaseName = defaultDatabase, collectionName = defaultCollection) {
+const isUniqueEmail= async(email, databaseName = defaultDatabase, collectionName = defaultCollection)=> {
     const client = await connectToMongo();
     console.log("Connected correctly to server isUniqueEmail");
-    
+
     try {
         const database = client.db(databaseName);
         const collection = database.collection(collectionName);
@@ -79,4 +77,4 @@ async function isUniqueEmail(email, databaseName = defaultDatabase, collectionNa
     }
 }
 
-module.exports = { createDocument, getDocuments, registerUser, loginUser, isUniqueEmail };
+export { createDocument, getDocuments, registerUser, loginUser, isUniqueEmail };

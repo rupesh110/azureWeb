@@ -1,11 +1,10 @@
-const { connectToMongo } = require('./mongoConnection');
-const { verifyToken } = require('../utils/usersValidate');
-const { ObjectId } = require('mongodb'); // Import ObjectId from the MongoDB driver
+import connectToMongo from './mongoConnection.js';
+import { ObjectId } from 'mongodb'; 
 
 const defaultDatabase = 'test'; // Default database name
-const defaultCollection = 'users'; // Default collection name
+const defaultCollection = 'users'; 
 
-async function getUsersFullname(userid, databaseName = defaultDatabase, collectionName = defaultCollection) {
+const getUsersFullname = async(userid, databaseName = defaultDatabase, collectionName = defaultCollection)  => {
     try {
         const client = await connectToMongo();
         console.log("getUsersFullname connected to mongo", databaseName, collectionName);
@@ -25,6 +24,4 @@ async function getUsersFullname(userid, databaseName = defaultDatabase, collecti
     }
 }
 
-module.exports = {
-    getUsersFullname,
-};
+export { getUsersFullname };

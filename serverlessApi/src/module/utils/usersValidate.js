@@ -1,19 +1,17 @@
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
 const saltRounds = 10;
-const secretKet = 'secretKey';
+const secretKey = process.env.JWT_SECRET || 'defaultSecretKey';
 
-const generateToken = async (context, userid) => {
-    const token = jwt.sign({ userid }, secretKet, {
-        expiresIn: '30d'
-    });
+const generateToken = async (userid) => {
+    const token = jwt.sign({ userid }, secretKey, { expiresIn: '1h' });
     return token;
 };
 
 const verifyToken = async (token) => {
     try{
-        const decoded = await jwt.verify(token, secretKet);
+        const decoded = await jwt.verify(token, secretKey);
         return decoded;
     }
     catch(error){
@@ -29,9 +27,4 @@ const comparePassword = async (password, hash) => {
     return await bcrypt.compare(password, hash);
 }
 
-module.exports = {
-    hashPassword,
-    comparePassword,
-    generateToken,
-    verifyToken
-}
+export { generateToken, verifyToken, hashPassword, comparePassword };

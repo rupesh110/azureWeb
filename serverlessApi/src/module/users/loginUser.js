@@ -1,38 +1,37 @@
-const { loginUser } = require('../database/usersConnection');
-const { loginRequestSchema } = require('../schemas/usersSchema');
-const { validateRequest } = require('../utils/schemaValidator');
-const { comparePassword, generateToken, verifyToken } = require('../utils/usersValidate');
 
+import { loginRequestSchema } from '../schemas/usersSchema.js';
+import { Validator } from 'jsonschema';
+import { loginUser } from '../database/usersConnection.js';
+import jwt from 'jsonwebtoken';
+
+const secretKey = process.env.JWT_SECRET || 'defaultSecretKey';
+
+const v = new Validator();
 const loginUserHandler = async (request, context) => {
     try {
         context.log('Http function was triggered.');
-
-        const userData = await validateRequest(request, loginRequestSchema);
-        console.log("🚀 ~ file: loginUser.js:11 ~ loginUserHandler ~ userData:", userData)
-
-        const result = await loginUser(userData);
-        context.log("🚀 ~ file: loginUser.js:13 ~ loginUserHandler ~ result:", result._id)
+        const response = await request.json();  
+        const isValidate = v.validate(response, loginRequestSchema);
         
-        
-        const matchedUser = await comparePassword(userData.Password, result.Password);
-
-        if (result.Email === userData.Email && matchedUser) {
-            const token = await generateToken(context, result._id.toString());
-            context.log('Generated token:', token);
-            const decoded = await verifyToken(token);
-            context.log('Decoded token:', decoded);
-
-            // Include the token in the response to be sent to the client
-            return context.res = {
-                body: JSON.stringify({ message: 'Login successful', token:{token} }),
-                status: 200,
+        if(!isValidate.valid){
+            return{
+                body: JSON.stringify({ message: 'Validation error'}),
+                status: 400,
             };
-
-        } else {
-            return context.res = {
-                body: JSON.stringify({ message: 'Login failed Invalid credentials' }),
-                status: 401, // Unauthorized
+        }
+        const result = await loginUser(response);
+        context.log("🚀 ~ file: loginUser.js:20 ~ loginUserHandler ~ result", result);
+        if(!result){
+            return{
+                body: JSON.stringify({ message: 'Login failed'}),
+                status: 400,
             };
+        }
+        const token = jwt.sign({ userid: result._id }, secretKey, { expiresIn: '1h' });
+
+        return{
+            body: JSON.stringify({ message: 'Validation successfull', token}),
+            status: 202,
         }
     } catch (error) {
         return context.res = {
@@ -41,5 +40,4 @@ const loginUserHandler = async (request, context) => {
         };
     }
 };
-
-module.exports = loginUserHandler;
+export default loginUserHandler;
