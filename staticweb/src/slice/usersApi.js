@@ -1,7 +1,14 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 const baseQuery = fetchBaseQuery({
-    baseUrl: 'http://localhost:7071/api/' || 'https://azurewebapi.azurewebsites.net/api', // Adjust this to the URL of your API service
+    baseUrl: process.env.NODE_ENV === 'production'
+        ? 'https://azurewebapi.azurewebsites.net/api'
+        : 'http://localhost:7071/api/',
+    headers: {
+        // Include any required headers here
+        'Content-Type': 'application/json',
+        // Add other headers as needed
+    },
 });
 
 export const usersApi = createApi({

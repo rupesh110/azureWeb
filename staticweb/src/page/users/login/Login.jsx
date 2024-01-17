@@ -26,13 +26,13 @@ const Login = () => {
     console.log('data', result);
 
     //Check if login was successful before resetting the form
-    if (!error && result && result.data) {
-      setFormData(initialData); // Reset the form to initial state
-    }
-    if(result.data.token){
-      sessionStorage.setItem('token', JSON.stringify(result.data.token));
-      naviate('/');
-    }
+    // if (!error && result && result.data) {
+    //   setFormData(initialData); // Reset the form to initial state
+    // }
+    // if(result.data.token){
+    //   sessionStorage.setItem('token', JSON.stringify(result.data.token));
+    //   naviate('/');
+    // }
   };
 
   const handleChange = (e) => {
