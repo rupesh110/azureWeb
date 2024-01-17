@@ -21,9 +21,11 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    console.log('formData', formData);
     const result = await login(formData);
     console.log('data', result);
-    // Check if login was successful before resetting the form
+
+    //Check if login was successful before resetting the form
     if (!error && result && result.data) {
       setFormData(initialData); // Reset the form to initial state
     }
@@ -49,7 +51,7 @@ const Login = () => {
     <div className="login-container">
       <div className="login-header">
         <h1>🚀 Space Portal</h1>
-        <p>Login to explore the galaxy</p>
+        <p>Please Login with the Google Account to explore..</p>
       </div>
 
       <Form onSubmit={handleLogin} className="login-form">
@@ -90,10 +92,12 @@ const Login = () => {
         
       </div>
 
+    
+
     <div className='sign-in-with-media'>
         <LoginGoogle />
 
-        <LoginFacebook />
+        {/* <LoginFacebook /> */}
     </div>
   
       </Form>

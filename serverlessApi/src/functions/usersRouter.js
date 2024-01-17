@@ -5,6 +5,7 @@ import loginUserHandler from '../module/users/loginUser.js';
 import loginMediaUserHandler from '../module/users/loginMediaUser.js';
 import getUserFullNameHandler from '../module/users/userFullname.js';
 
+
 app.http('register', {
     methods: ['GET', 'POST'],
     authLevel: 'anonymous',
@@ -37,10 +38,10 @@ app.http("test", {
     methods: ['GET', 'POST'],
     authLevel: 'anonymous',
     handler: async (request, context) => {
-        context.log(`Http function processed request for url "${request.url}"`);
-
-        const name = request.query.get('name') || await request.text() || 'world loosers';
-
-        return { body: `Hello, ${name}!` };
+        return { 
+            status: 202,
+            jsonBody: { message: 'Hello, world112', status: 202 },
+        };
     }
-})
+});
+

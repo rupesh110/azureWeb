@@ -15,7 +15,7 @@ const loginUserHandler = async (request, context) => {
         
         if(!isValidate.valid){
             return{
-                body: JSON.stringify({ message: 'Validation error'}),
+                jsonBody: { message: 'Validation error'},   
                 status: 400,
             };
         }
@@ -23,19 +23,19 @@ const loginUserHandler = async (request, context) => {
         context.log("🚀 ~ file: loginUser.js:20 ~ loginUserHandler ~ result", result);
         if(!result){
             return{
-                body: JSON.stringify({ message: 'Login failed'}),
+                jsonBody: { message: 'Login failed'},
                 status: 400,
             };
         }
         const token = jwt.sign({ userid: result._id }, secretKey, { expiresIn: '1h' });
 
         return{
-            body: JSON.stringify({ message: 'Validation successfull', token}),
+            jsonBody: { message: 'Validation successfull', token},
             status: 202,
         }
     } catch (error) {
         return context.res = {
-            body: JSON.stringify({ message: 'Login failed', error: error.message }),
+            jsonBody: { message: 'Login failed', error: error.message },
             status: 400,
         };
     }

@@ -7,8 +7,8 @@ const secretKey = process.env.JWT_SECRET || 'defaultSecretKey';
 const getUserFullNameHandler = async (request, context) => {
     try {
         const response = await request.json()
-        context.log('JavaScript HTTP trigger function processed a request.', response.Token);
-        const userId = jwt.verify(response.Token, secretKey).userid;
+        context.log('JavaScript HTTP trigger function processed a request.', response.token);
+        const userId = jwt.verify(response.token, secretKey).userid;
         context.log("User id:", userId);
         const userFullName = await getUsersFullname(userId);
         return {
@@ -25,3 +25,4 @@ const getUserFullNameHandler = async (request, context) => {
 };
 
 export default getUserFullNameHandler;
+ 

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button, Form, InputGroup } from 'react-bootstrap';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import './Register.css';
-import { useRegisterMutation } from '../../slice/usersApi.js';
+import { useRegisterMutation } from '../../../slice/usersApi.js';
 import { useNavigate } from 'react-router-dom';
 
 const initialFormData = {

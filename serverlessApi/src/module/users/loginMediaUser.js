@@ -29,6 +29,7 @@ const loginMediaUserHandler = async (request, context) => {
             };
         } else {
             const result = await registerUser(usersData);
+            const registerForEmail = await registerUser(usersData, 'test', 'logicApp');
             context.log("🚀 ~ file: loginMediaUser.js:9 ~ loginMediaUserHandler ~ result", result);
             const token = jwt.sign({ userid: result?.insertedId?.toString() }, secretKey, { expiresIn: '1h' });
 

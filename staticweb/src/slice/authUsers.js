@@ -3,8 +3,9 @@ import { useGetUserFullNameMutation } from './usersApi.js';
 
 const isAuthenticated = () => {
   const session = sessionStorage.getItem('token');
-  return !!session && !!JSON.parse(session).token;
+  return session ? true : false;
 };
+
 
 const useUserFullName = () => {
   const [userFullName, setUserFullName] = useState('');
@@ -13,12 +14,11 @@ const useUserFullName = () => {
   useEffect(() => {
     const fetchUserFullName = async () => {
       try {
-        const result = await getUserFullName(JSON.parse(sessionStorage.getItem('token')).token);
-        if (result.error) {
-          console.error('Error fetching user full name:', result.error.message);
-        } else {
-          setUserFullName(result.data.message);
-        }
+        const token = JSON.parse(sessionStorage.getItem('token'));
+        console.log("🚀 ~ file: authUsers.js:25 ~ fetchUserFullName ~ token", token);
+        const result = await getUserFullName(token);
+        console.log("🚀 ~ file: authUsers.js:27 ~ fetchUserFullName ~ result", result);
+        setUserFullName(result.data.message);
       } catch (error) {
         console.error('Unexpected error during data fetching:', error.message);
       }

@@ -45,7 +45,7 @@ const NavbarHome = () => {
                         Signed in as: <span>{userFullName}</span>
                       </>
                     ) : (
-                      <Link to="/register">Sign in</Link>
+                      <Link to="/login">Sign in</Link>
                     )}
                   </Dropdown.Toggle>
                   {dropdowMenu}

@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 const baseQuery = fetchBaseQuery({
-    baseUrl: 'http://localhost:7071/api', // Adjust this to the URL of your API service
+    baseUrl: 'http://localhost:7071/api/' || 'https://azurewebapi.azurewebsites.net/api', // Adjust this to the URL of your API service
 });
 
 export const usersApi = createApi({
@@ -24,19 +24,26 @@ export const usersApi = createApi({
         }),
         loginWithGoogle: builder.mutation({
             query: (data) => ({
-                url: '/users/loginWithGoogle',
+                url: '/users/loginMedia',
                 method: 'POST',
                 body: data,
             })
         }),
         getUserFullName: builder.mutation({
             query: (token) => ({  // Use token as a parameter
-                url: '/users/getUserFullName',
+                url: '/users/userFullname',
                 method: 'POST',
                 body: { token },  // Pass userid in the body
             })
-        })
+        }),
+        getTest: builder.mutation({
+            query: (data) => ({
+                url: '/test',
+                method: 'GET',
+                body: data,
+            })
+        }),
     }),
 });
 
-export const { useRegisterMutation, useLoginMutation, useLoginWithGoogleMutation, useGetUserFullNameMutation } = usersApi;
+export const { useRegisterMutation, useLoginMutation, useLoginWithGoogleMutation, useGetUserFullNameMutation, useGetTestMutation } = usersApi;
