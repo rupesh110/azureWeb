@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useGetTeamMutation } from '../../slice/cricketApi.js';
 
+import NavbarHome from '../../components/NavbarHome.jsx';
 
 import TeamCard from './components/TeamCard.jsx';
 
@@ -32,9 +33,13 @@ const AllTeam = () => {
   ));
 
   return (
-    <div style={{display: "flex", justifyContent: "center", flexWrap: "wrap"}}>
+    <div>
+      <NavbarHome />
+       <div style={{display: "flex", justifyContent: "center", flexWrap: "wrap"}}>
         {displayTeam}
     </div>
+    </div>
+   
   );
 };
 

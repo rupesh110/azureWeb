@@ -1,11 +1,11 @@
 import React from 'react';
-import { Container, Nav, Navbar} from 'react-bootstrap';
+import { Container, Nav, Navbar } from 'react-bootstrap';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { Link } from 'react-router-dom';
 import { useUserFullName } from '../slice/authUsers';
 
 const NavbarHome = () => {
-  const { userFullName} = useUserFullName();
+  const { userFullName } = useUserFullName();
 
   const handleLogout = () => {
     sessionStorage.removeItem('token');
@@ -13,39 +13,57 @@ const NavbarHome = () => {
   };
 
   const dropdowMenu = (
-    <Dropdown.Menu>
-      <Dropdown.Item href="#/action-1" onClick={handleLogout}>
+    <Dropdown.Menu
+      style={{
+        backgroundColor: '#343a40',
+        borderColor: '#343a40',
+      }}
+    >
+      <Dropdown.Item href="#/action-1" onClick={handleLogout} style={{ color: 'green' }}>
         LogOut
       </Dropdown.Item>
-      <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-      <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+      <Dropdown.Item href="#/action-2" style={{ color: 'green' }}>
+        Action
+      </Dropdown.Item>
+      <Dropdown.Item href="#/action-3" style={{ color: 'green' }}>
+        About
+      </Dropdown.Item>
     </Dropdown.Menu>
   );
 
   return (
     <>
-      <Navbar bg="dark" data-bs-theme="dark">
-        <Container style={{ padding: '1px 20px', margin: '15px', text: '12px' }}>
-          <Navbar.Brand style={{ fontSize: '30px' }} href="#home">
+      <Navbar bg="dark" expand="lg" variant="dark">
+        <Container fluid>
+          <Navbar.Brand style={{ fontSize: '30px', color: '#fff' }} href="#home">
             CricketCircle
           </Navbar.Brand>
-          <Nav className="me-auto">
-            <Nav.Link href="#team">Teams</Nav.Link>
-            <Nav.Link href="#schedule">Schedules</Nav.Link>
-            <Nav.Link href="#about">About</Nav.Link>
-          </Nav>
-          <Navbar.Toggle />
-          <Navbar.Collapse className="justify-content-end">
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-nav">
+            <Nav className="me-auto">
+              {/* Use Link to navigate to the AllTeam page */}
+              <Nav.Link as={Link} to="/allTeam" style={{ color: '#fff' }}>
+                Teams
+              </Nav.Link>
+              <Nav.Link href="/schedules" style={{ color: '#fff' }}>
+                Schedules
+              </Nav.Link>
+              <Nav.Link href="#about" style={{ color: '#fff' }}>
+                About
+              </Nav.Link>
+            </Nav>
             <Navbar.Text>
-              <div style={{ cursor: 'pointer' }}>
+              <div style={{ cursor: 'pointer', color: 'grey', paddingRight: '60px' }}>
                 <Dropdown>
-                  <Dropdown.Toggle variant="success" id="dropdown-basic">
+                  <Dropdown.Toggle variant="success" id="dropdown-basic" style={{ backgroundColor: '#28a745', borderColor: '#28a745' }}>
                     {userFullName !== '' ? (
                       <>
-                        Signed in as: <span>{userFullName}</span>
+                        Signed in as: <span style={{ color: '#fff' }}>{userFullName}</span>
                       </>
                     ) : (
-                      <Link to="/login">Sign in</Link>
+                      <Link to="/login" style={{ color: '#fff' }}>
+                        Sign in
+                      </Link>
                     )}
                   </Dropdown.Toggle>
                   {dropdowMenu}
