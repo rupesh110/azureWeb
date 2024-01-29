@@ -11,11 +11,12 @@ const options = {
 
 const thisUrl = 'schedule/v1/international';
 
-const fetchData = async () => {
+const fetchData = async (request, context) => {
     try {
         const response = await fetch(options.url + thisUrl, options);
         const data = await response.json();
-        return data.list;
+       
+        return data;
     } catch (error) {
         console.log(error);
     }

@@ -7,7 +7,7 @@ import { useLoginMutation } from '../../../slice/usersApi.js';
 import './Login.css';
 
 import LoginGoogle from './LoginGoogle.jsx';
-import LoginFacebook from './LoginFacebook.jsx';
+//import LoginFacebook from './LoginFacebook.jsx';
 const initialData = {
   Email: '',
   Password: '',

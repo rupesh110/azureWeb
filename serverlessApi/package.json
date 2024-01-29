@@ -10,7 +10,6 @@
   "dependencies": {
     "@azure/functions": "^4.0.0",
     "axios": "^1.6.5",
-    "azure-function-express": "^2.0.0",
     "bcrypt": "^5.1.1",
     "jsonschema": "^1.4.1",
     "jsonwebtoken": "^9.0.2",

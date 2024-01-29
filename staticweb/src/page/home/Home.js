@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import NavbarHome from '../../components/NavbarHome.jsx';
 
@@ -12,7 +12,7 @@ const Home = () => {
   return (
     <div>
         <NavbarHome />
-      <h1>Home</h1>
+      <h1>This page is still in development phase</h1>
 
 
     </div>

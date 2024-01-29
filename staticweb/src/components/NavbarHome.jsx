@@ -27,12 +27,12 @@ const NavbarHome = () => {
       <Navbar bg="dark" data-bs-theme="dark">
         <Container style={{ padding: '1px 20px', margin: '15px', text: '12px' }}>
           <Navbar.Brand style={{ fontSize: '30px' }} href="#home">
-            Navbar
+            CricketCircle
           </Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#features">Features</Nav.Link>
-            <Nav.Link href="#pricing">Pricing</Nav.Link>
+            <Nav.Link href="#team">Teams</Nav.Link>
+            <Nav.Link href="#schedule">Schedules</Nav.Link>
+            <Nav.Link href="#about">About</Nav.Link>
           </Nav>
           <Navbar.Toggle />
           <Navbar.Collapse className="justify-content-end">
