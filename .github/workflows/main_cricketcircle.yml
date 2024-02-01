@@ -14,14 +14,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       - name: Set up Node.js version
         uses: actions/setup-node@v3
         with:
-          node-version: '20'
+          node-version: '14' # Updated Node.js version
 
-      - name: npm install, build, and test
+      - name: Install dependencies and build
         run: |
           cd staticweb
           npm install
@@ -29,7 +30,7 @@ jobs:
           npm run test --if-present
 
       - name: Zip artifact for deployment
-        run: zip release.zip ./* -r
+        run: zip -r release.zip staticweb/*  # Corrected the zip command
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
@@ -44,7 +45,7 @@ jobs:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     permissions:
-      id-token: write #This is required for requesting the JWT
+      id-token: write # This is required for requesting the JWT
 
     steps:
       - name: Download artifact from build job
@@ -53,14 +54,12 @@ jobs:
           name: node-app
 
       - name: Unzip artifact for deployment
-        run: unzip release.zip
-      
+        run: unzip -o release.zip -d ./  # Updated the unzip command
+
       - name: Login to Azure
         uses: azure/login@v1
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_6D18DDC0851945BE9D9DD29728997BCB }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_FADB73FD423B4DCB9B63420782D58998 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_118081AFB3B44405BECAB51992CD6A84 }}
+          creds: ${{ secrets.AZURE_CREDENTIALS }} # Use AZURE_CREDENTIALS instead of individual secrets
 
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
