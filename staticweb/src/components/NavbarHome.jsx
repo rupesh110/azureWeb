@@ -45,7 +45,7 @@ const NavbarHome = () => {
               <Nav.Link as={Link} to="/allTeam" style={{ color: '#fff' }}>
                 Teams
               </Nav.Link>
-              <Nav.Link href="/allSchedules" style={{ color: '#fff' }}>
+              <Nav.Link as={Link} to="/allSchedules" style={{ color: '#fff' }}>
                 Schedules
               </Nav.Link>
               <Nav.Link href="#about" style={{ color: '#fff' }}>

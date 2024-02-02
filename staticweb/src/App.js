@@ -20,7 +20,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/private" element={<AuthRoute path="/private" element={<PrivatePage />} />} />
         <Route path="/allTeam" element={<AllTeam />} />
-        <Route path="/schedules" element={<AllScheduledMatch />} />
+        <Route path="/allSchedules" element={<AllScheduledMatch />} />
         <Route path="*" element={<Home />} />
       </Routes>
     </Router>
