@@ -18,7 +18,7 @@ export const cricketApi = createApi({
     }),
     getScheduledMatch: builder.mutation({
       query: () => ({
-        url: '/cricket/matchSchedule',
+        url: '/cricket/allSchedules',
         method: 'GET',
         // Remove the 'body' property for a GET request
       }),

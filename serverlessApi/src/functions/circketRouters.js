@@ -35,6 +35,6 @@ app.http('fetchData',{
 app.http('matchSchedule',{
     methods: ['GET', 'POST'],
     authLevel: 'anonymous',
-    route: 'cricket/matchSchedule',
+    route: 'cricket/allSchedules',
     handler: getMatchSchedule
 })
