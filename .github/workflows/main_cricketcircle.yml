@@ -19,7 +19,7 @@ jobs:
         with:
           node-version: "14"
 
-      - name: Install dependencies and build
+      - name: npm install, build
         run: |
           cd staticweb
           npm install
@@ -48,9 +48,9 @@ jobs:
           name: staticweb
 
       - name: Unzip artifact for deployment
-        run: unzip staticweb.zip
+        run: unzip release.zip
 
-      - name: Deploy to Azure Web App
+      - name: "Deploy to Azure Web App"
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
