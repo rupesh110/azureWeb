@@ -30,7 +30,7 @@ jobs:
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
-          name: staticweb-app
+          name: staticweb
           path: release.zip
 
   deploy:
@@ -44,7 +44,7 @@ jobs:
       - name: Download artifact from build job
         uses: actions/download-artifact@v3
         with:
-          name: staticweb-app
+          name: staticweb
 
       - name: Unzip artifact for deployment
         run: unzip staticweb-app.zip
