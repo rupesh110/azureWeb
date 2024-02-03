@@ -7,5 +7,10 @@
     "azureFunctions.projectLanguageModel": 4,
     "azureFunctions.preDeployTask": "npm prune (functions)",
     "appService.defaultWebAppToDeploy": "/subscriptions/38f3193f-1881-4fb7-9242-2b472375c368/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/azurewebreact",
-    "appService.deploySubpath": "azurefunction"
+    "appService.deploySubpath": "azurefunction",
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.showBuildDuringDeployPrompt": false
 }

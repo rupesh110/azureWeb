@@ -6,32 +6,36 @@ on:
       - main
   workflow_dispatch:
 
+env:
+  AZURE_FUNCTIONAPP_PACKAGE_PATH: "./staticweb" # set this to the path to your web app project, defaults to the repository root
+  NODE_VERSION: "18.x"
+
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: "Checkout GitHub Action"
+        uses: actions/checkout@v4
 
       - name: Set up Node.js version
         uses: actions/setup-node@v3
         with:
-          node-version: "14"
+          node-version: ${{ env.NODE_VERSION }}
 
-      - name: npm install, build
+      - name: "Resolve Project Dependencies Using Npm"
+        shell: pwsh
         run: |
-          cd staticweb
+          pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
           npm install
-          npm run build
-
-      - name: Zip artifact for deployment
-        run: zip -r release.zip ./*
+          npm run build --if-present
+          popd
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
-          name: staticweb
-          path: release.zip
+          name: frontend
+          path: .
 
   deploy:
     runs-on: ubuntu-latest
@@ -44,16 +48,12 @@ jobs:
       - name: Download artifact from build job
         uses: actions/download-artifact@v3
         with:
-          name: staticweb
-
-      - name: Unzip artifact for deployment
-        run: unzip staticweb/release.zip
+          name: frontend
 
       - name: "Deploy to Azure Web App"
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
           app-name: "cricketCircle"
-          slot-name: "Production"
-          package: .
+          package: "./staticweb"
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_93ED38A4A00C4FBDBFC018687FAB6BA8 }}
