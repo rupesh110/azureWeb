@@ -58,5 +58,5 @@ jobs:
         with:
           app-name: "cricketCircle"
           slot-name: "Production"
-          package: .
+          package: ./staticweb
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_93ED38A4A00C4FBDBFC018687FAB6BA8 }}
