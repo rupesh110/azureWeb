@@ -32,7 +32,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: staticweb
-          path: release.zip
+          path: staticweb/release.zip # Update the path if necessary
 
   deploy:
     runs-on: ubuntu-latest
