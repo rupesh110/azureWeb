@@ -59,5 +59,5 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: "cricketCircle"
-          package: ${{ github.workspace }}/staticweb/build
+          package: "./staticweb/build"
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_93ED38A4A00C4FBDBFC018687FAB6BA8 }}
