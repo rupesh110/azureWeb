@@ -11,8 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Set up Node.js version
         uses: actions/setup-node@v3
@@ -26,13 +25,13 @@ jobs:
           npm run build
 
       - name: Zip artifact for deployment
-        run: zip -r release.zip ./staticweb/*
+        run: zip -r release.zip ./*
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
           name: staticweb
-          path: staticweb/release.zip # Update the path if necessary
+          path: release.zip
 
   deploy:
     runs-on: ubuntu-latest
@@ -48,7 +47,7 @@ jobs:
           name: staticweb
 
       - name: Unzip artifact for deployment
-        run: unzip release.zip
+        run: unzip staticweb/release.zip
 
       - name: "Deploy to Azure Web App"
         id: deploy-to-webapp
