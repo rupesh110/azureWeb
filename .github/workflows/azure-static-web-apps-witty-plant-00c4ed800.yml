@@ -38,6 +38,6 @@ jobs:
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
           action: "upload"
-          app_location: "staticweb" # Adjust the path to your app source code
+          app_location: "staticweb/build" # Adjust the path to your app source code
           api_location: "" # If you have API functions
-          output_location: "staticweb/build" # Adjust the path to the build directory of your app
+          output_location: "build" # Adjust the path to the build directory of your app
