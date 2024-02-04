@@ -33,9 +33,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Deploy to Azure Web App
-        uses: azure/webapps-deploy@v3
+      - name: Deploy to Azure Static Web Apps
+        uses: Azure/static-web-apps-deploy@v1
         with:
-          app-name: "cricketcircle" # Replace with your Azure Web App name
-          publish-profile: ${{ secrets.AZURE_STATIC_APPS_TOKEN }}
-          package: "staticweb/build" # Adjust the path to the build directory of your Node.js app
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+          action: "upload"
+          app_location: "staticweb" # Adjust the path to your app source code
+          api_location: "" # If you have API functions
+          output_location: "staticweb/build" # Adjust the path to the build directory of your app
