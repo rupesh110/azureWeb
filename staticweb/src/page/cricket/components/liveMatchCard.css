@@ -1,0 +1,30 @@
+.cardStyle {
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 2px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    min-width: "22px";
+    max-width: "30px";
+    margin: 0 1rem 1rem 1rem;
+}
+
+.titleStyle {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 12px;
+    margin-left: "2px";
+}
+
+.subtitleStyle {
+    color: #555;
+    font-size: 1.2rem;
+    margin-bottom: 12px;
+}
+
+.statusStyle {
+    font-weight: bold;
+    font-size: 1.2rem;
+    /* You can dynamically set color in React component */
+}

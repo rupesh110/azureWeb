@@ -35,7 +35,9 @@ const NavbarHome = () => {
     <>
       <Navbar bg="dark" expand="lg" variant="dark">
         <Container fluid>
-          <Navbar.Brand style={{ fontSize: '30px', color: '#fff' }} href="#home">
+          {/* <img src="./circketCircle.jpg" alt="cricket" style={{ maxWidth: '3%', height: 'auto' }} /> */}
+
+          <Navbar.Brand style={{ fontSize: '30px', color: '#fff' }} as={Link} to="/">
             CricketCircle
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />

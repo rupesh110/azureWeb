@@ -1,0 +1,43 @@
+/* AllScheduledMatch.css */
+
+
+.schedule-item {
+    margin: '0 1rem 2rem 1rem';
+    display: 'flex'; 
+    flex-direction: 'row';
+}
+
+.date {
+    margin: '2rem 0';
+    text-align: 'center';
+}
+
+.matches {
+    display: 'flex';
+    flex-direction: 'row'; 
+    flex-wrap: 'wrap';
+}
+  
+
+
+@media screen and (max-width: 600px) {
+    /* Styles for screens smaller than 600px */
+    .container {
+      /* Adjust your styles for smaller screens */
+    }
+  }
+  
+  @media screen and (min-width: 601px) and (max-width: 1024px) {
+    /* Styles for screens between 601px and 1024px */
+    .container {
+      /* Adjust your styles for medium-sized screens */
+    }
+  }
+  
+  @media screen and (min-width: 1025px) {
+    /* Styles for screens larger than 1024px */
+    .container {
+      /* Adjust your styles for larger screens */
+    }
+  }
+  

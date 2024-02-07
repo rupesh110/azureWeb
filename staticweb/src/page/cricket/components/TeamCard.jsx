@@ -15,7 +15,7 @@ const TeamCard = (props) => {
 
   const handleMouseEnter = () => {
     if (cardRef.current) {
-      cardRef.current.style.transform = 'scale(1.05)';
+      cardRef.current.style.transform = 'scale(1.20)';
     }
   };
 
@@ -24,6 +24,9 @@ const TeamCard = (props) => {
       cardRef.current.style.transform = 'scale(1)';
     }
   };
+  const handleClick = (event) => {
+    alert("You clicked " + props.teamName);
+  }
 
   return (
     <div
@@ -56,7 +59,7 @@ const TeamCard = (props) => {
         justifyContent: 'center',
         alignItems: 'center',
       }}>
-        <p style={{ color: 'white', fontSize: '1rem' }}>{props.status}</p>
+        <p style={{ color: 'white', fontSize: '1rem' }} onClick={handleClick}>{props.status}</p>
       </div>
     </div>
   );

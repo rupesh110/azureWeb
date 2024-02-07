@@ -23,7 +23,13 @@ export const cricketApi = createApi({
         // Remove the 'body' property for a GET request
       }),
     }),
+    getTodayMatchSchedule: builder.mutation({
+      query: () => ({
+        url: '/cricket/todayMatchSchedule',
+        method: 'GET',
+      }),
+    }),
   }),
 });
 
-export const { useGetTeamMutation, useGetScheduledMatchMutation } = cricketApi;
+export const { useGetTeamMutation, useGetScheduledMatchMutation, useGetTodayMatchScheduleMutation } = cricketApi;

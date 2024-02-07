@@ -15,7 +15,7 @@ const getMatchScheduleHandler = async (request, context) => {
         console.error("Error in getMatchScheduleHandler:", error);
 
         return {
-            status: 404, // Internal Server Error
+            status: 401, // Internal Server Error
             jsonBody: { error: "Bad Request" },
         };
     }
